@@ -51,6 +51,7 @@ module.exports = app;
 http.createServer(
 	function (req, res)
 	{
+		console.log( "request is : " + req.url + "\n" );
 		if(req.url == '/')
 		{
 			res.writeHead(200, {'Content-Type': 'text/html'});
