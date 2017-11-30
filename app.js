@@ -15,6 +15,7 @@ var http         = require('http');
 var jade = require('jade');
 var renderFunc_enter = jade.compileFile('./jade/enter.jade');
 var renderFunc_wait = jade.compileFile('./jade/wait.jade');
+var renderFunc_result = jade.compileFile('./jade/result.jade');
 
 var app = express();
 
@@ -119,6 +120,14 @@ http.createServer(
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write("<html><body>ok</body></html>");
 			return res.end();
+		}
+		else if(justurl == '/result.html')
+		{
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			fs.readFile("C:/GIT/EXJOBB/test.vtt", 'utf8',function (err,data) {
+				res.write(renderFunc_result(text:data));
+				return res.end();
+			});
 		}
 		else if (justurl == '/favicon.ico')
 		{
