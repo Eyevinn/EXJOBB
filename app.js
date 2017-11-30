@@ -140,6 +140,22 @@ http.createServer(
 		{
 			res.status(404).send('Not found');
 		}
+		
+		
+		else if (justurl='test.fil')
+		{
+			res.writeHead(200, {'Content-Type': 'video/mp4'});
+			fs.readFile("C:/GIT/EXJOBB/test.fil", function(error, content) {
+				res.end(content);
+			});
+		}
+		else if (justurl='test.vtt')
+		{
+			res.writeHead(200, {'Content-Type': 'text/vtt'});
+			fs.readFile("C:/GIT/EXJOBB/test.vtt", function(error, content) {
+				res.end(content, 'utf-8');
+			});
+		}
 	}
 ).listen(2000); 
 
