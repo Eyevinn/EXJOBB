@@ -99,7 +99,13 @@ http.createServer(
 			//	
 			//	
 			//});
-			exe = "path to exe";
+			//exe = "path to exe";
+			
+			var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
+			var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
+			var param   = ' -F vtt -S en -D en ';
+			var movie   = 'C:/GIT/EXJOBB/test.fil'
+			var cmd = exec(pyth + autosub + param + movie);
 		}
 		else if (justurl == '/favicon.ico')
 		{
