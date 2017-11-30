@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Speech to text</title>
+	
+	<link rel="stylesheet" type="text/css" href="../stylesheets/stt.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="../stylesheets/stt.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<article class="content-box">
+		<section class="upload_area">
+			<header class="upload_file">
+				<h2>Upload a video</h2>
+	  			<input type="file" id="videofile" name="video">
+			</header>
+
+			<div id="inputSection">
+				<table>
+  <tr>
+    <th>Input language</th>
+    <th><select id="mySelect">
+  <option value="Swedish">Swedish</option>
+  <option value="English">English</option>
+  
+</select></th>
+  </tr>
+
+</table>
+
+<table>
+  <tr>
+    <th>Output language</th>
+    <th><select class="outputSelect" multiple>
+   <option value="Swedish">Swedish</option>
+  <option value="English">English</option>
+</select></th>
+  </tr>
+
+</table>
+			</div>
+			<!--
+			<section class="lang_area top_margin">
+				<div class="input_lang_area">
+					<button class="button">Input Language</button>
+					<select id="mySelect">
+  				<option value="apple">Apple</option>
+  				<option value="orange">Orange</option>
+ 				 <option value="pineapple">Pineapple</option>
+ 				 <option value="banana">Banana</option>
+				</select>
+
+				</div>
+
+				<div class="output_lang_area">
+					<button onclick="dropdown()" class="button">Output Language</button>
+					<div class="output_lang_content">
+						<div class="lang_name">English</div>
+						<input type="checkbox" name="language" value="English"></input>
+					</div>
+					<div class="output_lang_content">
+						<div class="lang_name">Swedish</div>
+						<input type="checkbox" name="language" value="Swedish"></input>
+					</div>
+				</div>
+			</section>
+			-->
+			
+			<input class="button top_margin" id="uploadButton" type="submit" value="UPLOAD"></input>
+
+		</section>
+		<section class="files_area">
+			<header>
+				<h2>Player</h2>
+			</header>
+			<!--<table class="list_converted border">
+				<tr>
+					<th class="filename border">File name</th>
+					<th class="play border">Play</th>
+					<th class="download border">Download</th>
+				</tr>
+				<tr>
+					<td class="filename border" title="Name of the processed file">
+						<p>SPORTlib</p>
+					</td>
+					<td class="play border" title="Start the web player">
+						<div class="fa fa-play-circle" style="font-size:20px;"></div>
+					</td>
+					<td class="download border" title="Download the generated text file">
+						<div class="fa fa-cloud-download" style="font-size:20px;"></div>
+					</td>
+				</tr>
+			</table>-->
+				<video class="player" controls>
+				<select id ="player" source src="../video/high_profile1.mp4" type="video/mp4">
+				<track src="text/subtitles.vtt" kind="subtitles" srclang="en" label="English">
+				<track src="text/subtitles.vtt" kind="subtitles" srclang="se" label="Swedish">
+				Your browser does not support the video tag.
+			</video>
+		</section>
+		<footer>
+			<div class="left_footer">
+				<img class="left_logo" src="../images/eyevinn-technology-700px-transparent.png"></img>
+			</div>
+			<div class="right_footer">
+				
+			</div>
+		</footer>
+	</article>
+	<script type="text/javascript" src="../javascripts/index.js"></script>
+</body>
+
+</html>

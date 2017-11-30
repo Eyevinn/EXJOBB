@@ -1,0 +1,184 @@
+body {
+	background-color: black;
+}
+
+.content-box {
+	font-family: Helvetica Neue, Arial;
+	width: 500px;
+	background-color: white;
+	margin: auto;
+}
+
+h2 {
+	font-size: 30px;
+	font-weight: 200;
+    margin-top: 0px;
+}
+
+p,th,a {
+	font-weight: 200;
+}
+
+
+.fa,
+.fa-play-circle,
+.fa-cloud-download {
+	color: #25bbee;
+}
+
+
+.upload_area {
+	background-color: #fafafa;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.lang_area {
+	width:100%;
+	display: flex;
+}
+
+.input_lang_area {
+	width: 180px;
+	margin-right: 50px;
+	border: 1px solid grey;
+}
+.output_lang_area {
+	width: 180px;
+	border: 1px solid grey;
+}
+
+.input-lang-content {
+	display: block;
+	margin:10px;
+}
+
+.lang_name {
+	display: inline-block;
+	font-weight: 200;
+}
+
+.input-lang-content input{
+	float:right;
+}
+
+.output-lang-content {
+	display: block;
+	margin:10px;
+	font-weight: 200;
+}
+
+.output_lang_content {
+	 display: block;
+	margin:10px;
+}
+
+.output_lang_content input{
+	float:right;
+}
+
+.lang_header {
+    background-color: #25bbee;
+    color: white;
+    font-size: 16px;
+	  font-weight: 200;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.files_area {
+	background-color: #fafafa;
+    padding: 20px;
+}
+
+.top_margin {
+	margin-top: 20px;
+}
+
+.button {
+    background-color: #25bbee;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+	  font-weight: 200;
+    border: none;
+    cursor: pointer;
+    width: 180px;
+}
+
+.button:hover, .dropbtn:focus {
+    background-color: #1b91b9;
+}
+
+.list_converted {
+	width: 100%;
+	min-height: 88px;
+	max-height: 260px;
+	overflow: scroll;
+	display: inline-block;
+}
+
+.border {
+	border: 1px solid grey;	
+}
+
+.filename {
+	width: 100%;
+}
+
+.filename p {
+    margin-left: 10px;
+}
+
+.play {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.download {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+video {
+	width: 100%;
+	margin-top: 0px;
+}
+
+footer {
+	font-family: Helvetica Neue, Arial;
+	width: 500px;
+	background-color: lightgrey;
+	color: white;
+	margin: auto;
+    display: flex;
+}
+
+.left_logo {
+	width: 40%;
+    padding-top: 19px;
+   padding-left: 25px;
+	 padding-bottom: 15px;
+}
+
+.right_logo {
+	width: 35%;
+    padding-top: 19px;
+   padding-right: 25px;
+	 padding-bottom: 15px;
+}
+
+.left_footer {
+	text-align: left;
+    display: inline-block;
+}
+
+.right_footer {
+	text-align: right;
+}
+.outputSelect{
+	height: 20px !important;
+}

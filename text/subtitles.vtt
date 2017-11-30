@@ -1,0 +1,10 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.000
+This is the <b>first</b> line of text, <u>displaying from 1-5 seconds</u>
+
+2
+00:00:07.000 --> 00:00:20.000
+And the second line of text separated over
+two lines with a <c.customClass>custom CSS as well</c>.
