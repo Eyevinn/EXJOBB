@@ -64,7 +64,7 @@ var namn;
 http.createServer(
 	function (req, res)
 	{
-		console.log( "request is : " + req.url + "\n" );
+		//console.log( "request is : " + req.url + "\n" );
 		var justurl = req.url.split('?')[0];
 		namn = req.url.split('=')[1];
 		console.log( "just request is : " + justurl + "\n" );
@@ -109,7 +109,7 @@ http.createServer(
 			var cmd = exec(pyth + autosub + param + movie);
 			
 			res.writeHead(200, {'Content-Type': 'text/html'});
-			res.write("<html><head><meta http-equiv='refresh' content='1; url=ok.html'></head></html>");
+			res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
 			
 
 			return res.end();
@@ -125,7 +125,7 @@ http.createServer(
 		{
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			fs.readFile("C:/GIT/EXJOBB/test.vtt", 'utf8',function (err,data) {
-				res.write(renderFunc_result(text:data));
+				res.write(renderFunc_result({text:data}));
 				return res.end();
 			});
 		}
