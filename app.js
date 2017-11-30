@@ -103,9 +103,22 @@ http.createServer(
 			
 			var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
 			var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
-			var param   = ' -F vtt -S en -D en ';
+			var param   = ' -F vtt -S sv -D sv ';
 			var movie   = 'C:/GIT/EXJOBB/test.fil'
 			var cmd = exec(pyth + autosub + param + movie);
+			
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write("<html><head><meta http-equiv='refresh' content='1; url=ok.html'></head></html>");
+			
+
+			return res.end();
+			
+		}
+		else if (justurl == '/ok.html')
+		{
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write("<html><body>ok</body></html>");
+			return res.end();
 		}
 		else if (justurl == '/favicon.ico')
 		{
