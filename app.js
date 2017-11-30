@@ -16,6 +16,7 @@ var jade = require('jade');
 var renderFunc_enter = jade.compileFile('./jade/enter.jade');
 var renderFunc_wait = jade.compileFile('./jade/wait.jade');
 var renderFunc_result = jade.compileFile('./jade/result.jade');
+var renderFunc_visa = jade.compileFile('./jade/visa.jade');
 
 var app = express();
 
@@ -128,6 +129,12 @@ http.createServer(
 				res.write(renderFunc_result({text:data}));
 				return res.end();
 			});
+		}
+		else if(justurl == '/visa.html')
+		{
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write(renderFunc_visa());
+			return res.end();
 		}
 		else if (justurl == '/favicon.ico')
 		{
