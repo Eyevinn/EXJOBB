@@ -19,6 +19,7 @@ var renderFunc_wait   = jade.compileFile('./jade/wait.jade');
 var renderFunc_result = jade.compileFile('./jade/result.jade');
 var renderFunc_visa   = jade.compileFile('./jade/visa.jade');
 var renderFunc_edit   = jade.compileFile('./jade/edit.jade');
+var renderFunc_error  = jade.compileFile('./jade/error.jade');
 
 var app = express();
 
@@ -111,8 +112,14 @@ http.createServer(
 				param += " ";
 				console.log(param);
 				var movie   = 'C:/GIT/EXJOBB/test.mp4';
-				var cmd = exec(pyth + autosub + param + movie);
-				
+				try {
+					var cmd = exec(pyth + autosub + param + movie);
+				} catch (err) {
+					console.log(err);
+					res.writeHead(200, {'Content-Type': 'text/html'});
+					res.write("<html><head><meta http-equiv='refresh' content='1; url=error.html'></head></html>");
+					return res.end();
+				}
 				res.writeHead(200, {'Content-Type': 'text/html'});
 				res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
 				
@@ -192,12 +199,7 @@ http.createServer(
 		else if (justurl=='/download.vtt')
 		{
 			console.log("serving download");
-			//res.sendFile("C:/GIT/EXJOBB/test.vtt");
-			//res.writeHead(200, {'Content-Type': 'text/vtt'});
-			//fs.readFile("C:/GIT/EXJOBB/test.vtt", function(error, content) {
-			//	res.end(content);
-			//});
-			
+
 			var stat = fs.statSync("C:/GIT/EXJOBB/test.vtt");
 			var file = fs.readFileSync("C:/GIT/EXJOBB/test.vtt", 'binary');
 
@@ -206,6 +208,13 @@ http.createServer(
 			res.setHeader('Content-Disposition', 'attachment; filename=download.vtt');
 			res.write(file, 'binary');
 			res.end();
+		}
+		else if (justurl=='/error.html')
+		{
+			console.log("serving error");
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write(renderFunc_error());
+			return res.end();
 		}
 	}
 ).listen(2000); 
