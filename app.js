@@ -192,10 +192,20 @@ http.createServer(
 		else if (justurl=='/download.vtt')
 		{
 			console.log("serving download");
-			res.writeHead(200, {'Content-Type': 'text/htt'});
-			fs.readFile("C:/GIT/EXJOBB/test.htt", function(error, content) {
-				res.end(content);
-			});
+			//res.sendFile("C:/GIT/EXJOBB/test.vtt");
+			//res.writeHead(200, {'Content-Type': 'text/vtt'});
+			//fs.readFile("C:/GIT/EXJOBB/test.vtt", function(error, content) {
+			//	res.end(content);
+			//});
+			
+			var stat = fs.statSync("C:/GIT/EXJOBB/test.vtt");
+			var file = fs.readFileSync("C:/GIT/EXJOBB/test.vtt", 'binary');
+
+			res.setHeader('Content-Length', stat.size);
+			res.setHeader('Content-Type', 'text/vtt');
+			res.setHeader('Content-Disposition', 'attachment; filename=download.vtt');
+			res.write(file, 'binary');
+			res.end();
 		}
 	}
 ).listen(2000); 
