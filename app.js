@@ -69,9 +69,7 @@ http.createServer(
 	{
 		console.log( "request is : " + req.url + "\n" );
 		var justurl = req.url.split('?')[0];
-		namn = req.url.split('=')[1];
-		console.log( "just request is : " + justurl + "\n" );
-		lang = 'se';
+		console.log(req.method);
 		if(justurl == '/')
 		{
 			res.writeHead(200, {'Content-Type': 'text/html'});
@@ -81,11 +79,13 @@ http.createServer(
 		else if (justurl == '/wait.html')
 		{
 			db.update({ _id:'ident'}, {$set:{name: namn }}, {}, function(){} );
-			db.update({ _id:'ident'}, {$set:{lang: lang }}, {}, function(){} );
 
 			var form = new formidable.IncomingForm();
 			form.parse(req, function (err, fields, files)
 			{
+				lang = fields.lang;
+				console.log(lang);
+				db.update({ _id:'ident'}, {$set:{lang: lang }}, {}, function(){} );
 				var oldpath = files.filename.path;
 				var newpath = 'C:/GIT/EXJOBB/test.mp4' ;
 				fs.rename(oldpath, newpath, function (err) {
@@ -95,21 +95,29 @@ http.createServer(
 					return res.end();
 				});
 			});
+			
 		}
 		else if (justurl == '/process.html')
 		{
-			
-			var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
-			var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
-			var param   = ' -F vtt -S sv -D sv ';
-			var movie   = 'C:/GIT/EXJOBB/test.mp4';
-			var cmd = exec(pyth + autosub + param + movie);
-			
-			res.writeHead(200, {'Content-Type': 'text/html'});
-			res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
-			
-			return res.end();
-			
+			db.find({ "_id": "ident" }, function (err, docs) {
+				
+				var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
+				var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
+				var param   = ' -F vtt -S ';
+				param += docs[0].lang;
+				//console.log(docs);
+				param += " -D ";
+				param += docs[0].lang;
+				param += " ";
+				console.log(param);
+				var movie   = 'C:/GIT/EXJOBB/test.mp4';
+				var cmd = exec(pyth + autosub + param + movie);
+				
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
+				
+				return res.end();
+			});
 		}
 		else if (justurl == '/ok.html')
 		{
