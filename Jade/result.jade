@@ -1,14 +1,21 @@
 html
 	head
 		title stt
+		meta(charset="UTF-8")
 	body
 		p Undertexter skapade
-		textarea
+		textarea(readonly rows='25' cols='80')
 			| #{text}
 		hr
 		
-		a(href = "visa.html") visa
+		a(href = "visa.html")
+			button
+				| Visa
 		br
-		a(href = "save.html") save
+		a(href = "save.html")
+			button
+				| Save
 		br
-		a(href = "edit.html") edit
+		a(href = "edit.html")
+			button
+				| Edit

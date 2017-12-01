@@ -13,10 +13,12 @@ var users = require('./routes/users');
 
 var http         = require('http');
 var jade = require('jade');
-var renderFunc_enter = jade.compileFile('./jade/enter.jade');
-var renderFunc_wait = jade.compileFile('./jade/wait.jade');
+
+var renderFunc_enter  = jade.compileFile('./jade/enter.jade');
+var renderFunc_wait   = jade.compileFile('./jade/wait.jade');
 var renderFunc_result = jade.compileFile('./jade/result.jade');
-var renderFunc_visa = jade.compileFile('./jade/visa.jade');
+var renderFunc_visa   = jade.compileFile('./jade/visa.jade');
+var renderFunc_edit   = jade.compileFile('./jade/edit.jade');
 
 var app = express();
 
@@ -65,10 +67,11 @@ var namn;
 http.createServer(
 	function (req, res)
 	{
-		//console.log( "request is : " + req.url + "\n" );
+		console.log( "request is : " + req.url + "\n" );
 		var justurl = req.url.split('?')[0];
 		namn = req.url.split('=')[1];
 		console.log( "just request is : " + justurl + "\n" );
+		lang = 'se';
 		if(justurl == '/')
 		{
 			res.writeHead(200, {'Content-Type': 'text/html'});
@@ -78,12 +81,13 @@ http.createServer(
 		else if (justurl == '/wait.html')
 		{
 			db.update({ _id:'ident'}, {$set:{name: namn }}, {}, function(){} );
+			db.update({ _id:'ident'}, {$set:{lang: lang }}, {}, function(){} );
 
 			var form = new formidable.IncomingForm();
 			form.parse(req, function (err, fields, files)
 			{
 				var oldpath = files.filename.path;
-				var newpath = 'C:/GIT/EXJOBB/test.fil' ;
+				var newpath = 'C:/GIT/EXJOBB/test.mp4' ;
 				fs.rename(oldpath, newpath, function (err) {
 					if (err) throw err;
 					res.writeHead(200, {'Content-Type': 'text/html'});
@@ -94,25 +98,16 @@ http.createServer(
 		}
 		else if (justurl == '/process.html')
 		{
-			//db.find({_id:'ident'}, function (err, docs) {
-			//	//console.log(docs);
-			//	namn = docs[0].name;
-			//	//console.log(namn);
-			//	
-			//	
-			//});
-			//exe = "path to exe";
 			
 			var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
 			var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
 			var param   = ' -F vtt -S sv -D sv ';
-			var movie   = 'C:/GIT/EXJOBB/test.fil'
+			var movie   = 'C:/GIT/EXJOBB/test.mp4';
 			var cmd = exec(pyth + autosub + param + movie);
 			
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
 			
-
 			return res.end();
 			
 		}
@@ -132,25 +127,36 @@ http.createServer(
 		}
 		else if(justurl == '/visa.html')
 		{
+			console.log("serving visa");
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write(renderFunc_visa());
 			return res.end();
 		}
+		else if(justurl == '/edit.html')
+		{
+			console.log("serving visa");
+			fs.readFile("C:/GIT/EXJOBB/test.vtt", 'utf8',function (err,data) {
+				res.write(renderFunc_edit({text:data}));
+				return res.end();
+			});
+		}
 		else if (justurl == '/favicon.ico')
 		{
-			res.status(404).send('Not found');
+			res.writeHead(404, {});
+			res.write('Not found');
+			res.end();
 		}
-		
-		
-		else if (justurl='test.fil')
+		else if (justurl=='/test.mp4')
 		{
+			console.log("serving movie");
 			res.writeHead(200, {'Content-Type': 'video/mp4'});
-			fs.readFile("C:/GIT/EXJOBB/test.fil", function(error, content) {
+			fs.readFile("C:/GIT/EXJOBB/test.mp4", function(error, content) {
 				res.end(content);
 			});
 		}
-		else if (justurl='test.vtt')
+		else if (justurl=='/test.vtt')
 		{
+			console.log("serving subtitles");
 			res.writeHead(200, {'Content-Type': 'text/vtt'});
 			fs.readFile("C:/GIT/EXJOBB/test.vtt", function(error, content) {
 				res.end(content, 'utf-8');

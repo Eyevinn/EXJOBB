@@ -3,5 +3,10 @@ html
 		title stt
 		
 	body
-		video(src = "test.fil")
+		video(src = "test.mp4", id = "video",  controls autoplay)
 			track(kind = "subtitles", src = "test.vtt", srclang="sv", label="Swe", default)
+		script
+			| video = document.getElementById("video");
+			| var tracks = video.textTracks[0];
+			| tracks.mode = 'showing';
+
