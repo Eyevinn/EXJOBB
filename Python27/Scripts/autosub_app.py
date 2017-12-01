@@ -92,8 +92,8 @@ class Translator(object):
     def __init__(self, language, api_key, src, dst):
         self.language = language
         self.api_key = api_key
-        self.service = build('translate', 'v2',
-                             developerKey=self.api_key)
+        print "Translating using the key: {0}".format(api_key)
+        self.service = build('translate', 'v2', developerKey=self.api_key)
         self.src = src
         self.dst = dst
 
@@ -183,6 +183,7 @@ def find_speech_regions(filename, frame_width=4096, min_region_size=0.5, max_reg
 
 
 def main():
+
     parser = argparse.ArgumentParser()
     parser.add_argument('source_path', help="Path to the video or audio file to subtitle", nargs='?')
     parser.add_argument('-C', '--concurrency', help="Number of concurrent API requests to make", type=int, default=10)

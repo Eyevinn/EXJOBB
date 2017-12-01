@@ -114,7 +114,7 @@ http.createServer(
 				param += docs[0].outlang;
 				param += " ";
 				if (docs[0].inlang != docs[0].outlang)
-					param += ' -K "AIzaSyASFkvmg0w4efBYB57p--Wa2Rs5BASD5Ec"  ';
+					param += ' -K AIzaSyASFkvmg0w4efBYB57p--Wa2Rs5BASD5Ec ';
 				console.log(param);
 				var movie   = 'C:/GIT/EXJOBB/test.mp4';
 				try {
