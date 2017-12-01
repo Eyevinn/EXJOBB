@@ -73,9 +73,11 @@ http.createServer(
 		console.log(req.method);
 		if(justurl == '/')
 		{
-			res.writeHead(200, {'Content-Type': 'text/html'});
-			res.write(renderFunc_enter());
-			return res.end();
+			fs.readFile("C:/GIT/EXJOBB/lang_html.txt", 'utf8', function (err, data) {
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				res.write(renderFunc_enter({langopt:data}));
+				return res.end();
+			});
 		}
 		else if (justurl == '/wait.html')
 		{
@@ -84,9 +86,10 @@ http.createServer(
 			var form = new formidable.IncomingForm();
 			form.parse(req, function (err, fields, files)
 			{
-				lang = fields.lang;
-				console.log(lang);
-				db.update({ _id:'ident'}, {$set:{lang: lang }}, {}, function(){} );
+				inlang = fields.inlang;
+				outlang = fields.outlang;
+				console.log(inlang + " -> " + outlang);
+				db.update({ _id:'ident'}, {$set:{inlang: inlang,outlang: outlang }}, {}, function(){} );
 				var oldpath = files.filename.path;
 				var newpath = 'C:/GIT/EXJOBB/test.mp4' ;
 				fs.rename(oldpath, newpath, function (err) {
@@ -105,11 +108,13 @@ http.createServer(
 				var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
 				var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
 				var param   = ' -F vtt -S ';
-				param += docs[0].lang;
+				param += docs[0].inlang;
 				//console.log(docs);
 				param += " -D ";
-				param += docs[0].lang;
+				param += docs[0].outlang;
 				param += " ";
+				if (docs[0].inlang != docs[0].outlang)
+					param += ' -K "AIzaSyASFkvmg0w4efBYB57p--Wa2Rs5BASD5Ec"  ';
 				console.log(param);
 				var movie   = 'C:/GIT/EXJOBB/test.mp4';
 				try {
@@ -215,6 +220,14 @@ http.createServer(
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.write(renderFunc_error());
 			return res.end();
+		}
+		else if (justurl=='/stt.css')
+		{
+			console.log("serving css");
+			res.writeHead(200, {'Content-Type': 'text/css'});
+			fs.readFile("C:/GIT/EXJOBB/css/stt.css", function(error, content) {
+				res.end(content, 'utf-8');
+			});
 		}
 	}
 ).listen(2000); 

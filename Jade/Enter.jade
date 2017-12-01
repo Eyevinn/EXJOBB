@@ -2,105 +2,19 @@ html
 	head
 		title stt
 		meta(charset="UTF-8")
+		link(href="stt.css", rel="stylesheet", type="text/css")
 	body 
 		form(action="wait.html" method="post" enctype="multipart/form-data")
 			br
-			select(name="lang" value="sv" )
-				option(value="sv")     Swedish
-				option(value="en")     English
-				option(disabled)       ──────────
-				option(value="af")     Afrikaans
-				option(value="ar")     Arabic
-				option(value="az")     Azerbaijani
-				option(value="be")     Belarusian
-				option(value="bg")     Bulgarian
-				option(value="bn")     Bengali
-				option(value="bs")     Bosnian
-				option(value="ca")     Catalan
-				option(value="ceb")    Cebuano
-				option(value="cs")     Czech
-				option(value="cy")     Welsh
-				option(value="da")     Danish
-				option(value="de")     German
-				option(value="el")     Greek
-				option(value="eo")     Esperanto
-				option(value="es")     Spanish
-				option(value="et")     Estonian
-				option(value="eu")     Basque
-				option(value="fa")     Persian
-				option(value="fi")     Finnish
-				option(value="fr")     French
-				option(value="ga")     Irish
-				option(value="gl")     Galician
-				option(value="gu")     Gujarati
-				option(value="ha")     Hausa
-				option(value="hi")     Hindi
-				option(value="hm")     Hmong
-				option(value="hr")     Croatian
-				option(value="ht")     Haitian Creole
-				option(value="hu")     Hungarian
-				option(value="hy")     Armenian
-				option(value="id")     Indonesian
-				option(value="ig")     Igbo
-				option(value="is")     Icelandic
-				option(value="it")     Italian
-				option(value="iw")     Hebrew
-				option(value="ja")     Japanese
-				option(value="jw")     Javanese
-				option(value="ka")     Georgian
-				option(value="kk")     Kazakh
-				option(value="km")     Khmer
-				option(value="kn")     Kannada
-				option(value="ko")     Korean
-				option(value="la")     Latin
-				option(value="lo")     Lao
-				option(value="lt")     Lithuanian
-				option(value="lv")     Latvian
-				option(value="mg")     Malagasy
-				option(value="mi")     Maori
-				option(value="mk")     Macedonian
-				option(value="ml")     Malayalam
-				option(value="mn")     Mongolian
-				option(value="mr")     Marathi
-				option(value="ms")     Malay
-				option(value="mt")     Maltese
-				option(value="my")     Myanmar (Burmese)
-				option(value="ne")     Nepali
-				option(value="nl")     Dutch
-				option(value="no")     Norwegian
-				option(value="ny")     Chichewa
-				option(value="pa")     Punjabi
-				option(value="pl")     Polish
-				option(value="pt")     Portuguese
-				option(value="ro")     Romanian
-				option(value="ru")     Russian
-				option(value="si")     Sinhala
-				option(value="sk")     Slovak
-				option(value="sl")     Slovenian
-				option(value="so")     Somali
-				option(value="sq")     Albanian
-				option(value="sr")     Serbian
-				option(value="st")     Sesotho
-				option(value="su")     Sudanese
-				option(value="sw")     Swahili
-				option(value="ta")     Tamil
-				option(value="te")     Telugu
-				option(value="tg")     Tajik
-				option(value="th")     Thai
-				option(value="tl")     Filipino
-				option(value="tr")     Turkish
-				option(value="uk")     Ukrainian
-				option(value="ur")     Urdu
-				option(value="uz")     Uzbek
-				option(value="vi")     Vietnamese
-				option(value="yi")     Yiddish
-				option(value="yo")     Yoruba
-				option(value="zh-CN")  Chinese (Simplified)
-				option(value="zh-TW")  Chinese (Traditional)
-				option(value="zu")     Zulu
-				
-				
-				
+			| talat språk &nbsp;&nbsp;
+			select(name="inlang" value="sv")
+				| !{langopt}
+			br
+			
+			| text språk &nbsp;&nbsp;
+			select(name="outlang" value="sv")
+				| !{langopt}
+			br
 			br
 			input(type="file" name="filename")
 			br
