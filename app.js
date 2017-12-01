@@ -73,7 +73,7 @@ http.createServer(
 		console.log(req.method);
 		if(justurl == '/')
 		{
-			fs.readFile("C:/GIT/EXJOBB/lang_html.txt", 'utf8', function (err, data) {
+			fs.readFile("./lang_html.txt", 'utf8', function (err, data) {
 				res.writeHead(200, {'Content-Type': 'text/html'});
 				res.write(renderFunc_enter({langopt:data}));
 				return res.end();
@@ -91,7 +91,7 @@ http.createServer(
 				console.log(inlang + " -> " + outlang);
 				db.update({ _id:'ident'}, {$set:{inlang: inlang,outlang: outlang }}, {}, function(){} );
 				var oldpath = files.filename.path;
-				var newpath = 'C:/GIT/EXJOBB/test.mp4' ;
+				var newpath = './test.mp4' ;
 				fs.rename(oldpath, newpath, function (err) {
 					if (err) throw err;
 					res.writeHead(200, {'Content-Type': 'text/html'});
@@ -105,8 +105,8 @@ http.createServer(
 		{
 			db.find({ "_id": "ident" }, function (err, docs) {
 				
-				var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
-				var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
+				var pyth    = __dirname + "/Python27/python.exe ";
+				var autosub = __dirname + "/Python27/scripts/autosub_app.py ";
 				var param   = '-F vtt -S ';
 				param += docs[0].inlang;
 				//console.log(docs);
@@ -115,7 +115,7 @@ http.createServer(
 				if (docs[0].inlang != docs[0].outlang)
 					param += ' -K AIzaSyASFkvmg0w4efBYB57p--Wa2Rs5BASD5Ec';
 				console.log(param);
-				var movie   = ' C:/GIT/EXJOBB/test.mp4';
+				var movie   = ' ./test.mp4';
 				try {
 					var cmd = exec(pyth + autosub + param + movie);
 				} catch (err) {
@@ -139,7 +139,7 @@ http.createServer(
 		else if(justurl == '/result.html')
 		{
 			res.writeHead(200, {'Content-Type': 'text/html'});
-			fs.readFile("C:/GIT/EXJOBB/test.vtt", 'utf8',function (err,data) {
+			fs.readFile("./test.vtt", 'utf8',function (err,data) {
 				res.write(renderFunc_result({text:data}));
 				return res.end();
 			});
@@ -154,7 +154,7 @@ http.createServer(
 		else if(justurl == '/edit.html')
 		{
 			console.log("serving visa");
-			fs.readFile("C:/GIT/EXJOBB/test.vtt", 'utf8',function (err,data) {
+			fs.readFile("./test.vtt", 'utf8',function (err,data) {
 				res.write(renderFunc_edit({text:data}));
 				return res.end();
 			});
@@ -169,7 +169,7 @@ http.createServer(
 		{
 			console.log("serving movie");
 			res.writeHead(200, {'Content-Type': 'video/mp4'});
-			fs.readFile("C:/GIT/EXJOBB/test.mp4", function(error, content) {
+			fs.readFile("./test.mp4", function(error, content) {
 				res.end(content);
 			});
 		}
@@ -177,7 +177,7 @@ http.createServer(
 		{
 			console.log("serving subtitles");
 			res.writeHead(200, {'Content-Type': 'text/vtt'});
-			fs.readFile("C:/GIT/EXJOBB/test.vtt", function(error, content) {
+			fs.readFile("./test.vtt", function(error, content) {
 				res.end(content, 'utf-8');
 			});
 		}
@@ -193,7 +193,7 @@ http.createServer(
 				res.writeHead(200, {'Content-Type': 'text/html'});
 				res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
 				
-				fs.writeFile("C:/GIT/EXJOBB/test.vtt", text, (err) => {
+				fs.writeFile("./test.vtt", text, (err) => {
 					if (err) throw err;
 					console.log('The file has been saved!');
 					res.end();
@@ -204,8 +204,8 @@ http.createServer(
 		{
 			console.log("serving download");
 
-			var stat = fs.statSync("C:/GIT/EXJOBB/test.vtt");
-			var file = fs.readFileSync("C:/GIT/EXJOBB/test.vtt", 'binary');
+			var stat = fs.statSync("./test.vtt");
+			var file = fs.readFileSync("./test.vtt", 'binary');
 
 			res.setHeader('Content-Length', stat.size);
 			res.setHeader('Content-Type', 'text/vtt');
@@ -224,7 +224,7 @@ http.createServer(
 		{
 			console.log("serving css");
 			res.writeHead(200, {'Content-Type': 'text/css'});
-			fs.readFile("C:/GIT/EXJOBB/css/stt.css", function(error, content) {
+			fs.readFile("./css/stt.css", function(error, content) {
 				res.end(content, 'utf-8');
 			});
 		}
