@@ -170,6 +170,33 @@ http.createServer(
 				res.end(content, 'utf-8');
 			});
 		}
+		else if (justurl=='/save.html')
+		{
+			console.log("serving save");
+
+			var form = new formidable.IncomingForm();
+			form.parse(req, function (err, fields, files)
+			{
+				var text = fields.text;
+				//console.log(text);
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				res.write("<html><head><meta http-equiv='refresh' content='1; url=result.html'></head></html>");
+				
+				fs.writeFile("C:/GIT/EXJOBB/test.vtt", text, (err) => {
+					if (err) throw err;
+					console.log('The file has been saved!');
+					res.end();
+				});
+			});
+		}
+		else if (justurl=='/download.vtt')
+		{
+			console.log("serving download");
+			res.writeHead(200, {'Content-Type': 'text/htt'});
+			fs.readFile("C:/GIT/EXJOBB/test.htt", function(error, content) {
+				res.end(content);
+			});
+		}
 	}
 ).listen(2000); 
 

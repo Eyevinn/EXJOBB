@@ -4,15 +4,18 @@ html
 		meta(charset="UTF-8")
 	body
 		p Redigera Undertexter
-		textarea(rows='25' cols='80')
-			| #{text}
-		hr
-		
-		a(href = "save.html")
-			button
-				| Spara
+
+		form(id="form1" name="form1" method="post" action="save.html")
+			//- input(type="text" name="input" id="textfield")
+			textarea(name="text" id="textarea" rows='25' cols='80')
+				| #{text}
+			hr
+			input(type="submit" name="button" id="button" value="Spara")
+
 		br
 		a(href = "result.html")
 			button
 				| Tillbaka
 		br
+
+
