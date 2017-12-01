@@ -107,16 +107,15 @@ http.createServer(
 				
 				var pyth    = "C:/GIT/EXJOBB/Python27/python.exe ";
 				var autosub = "C:/GIT/EXJOBB/Python27/scripts/autosub_app.py ";
-				var param   = ' -F vtt -S ';
+				var param   = '-F vtt -S ';
 				param += docs[0].inlang;
 				//console.log(docs);
 				param += " -D ";
 				param += docs[0].outlang;
-				param += " ";
 				if (docs[0].inlang != docs[0].outlang)
-					param += ' -K AIzaSyASFkvmg0w4efBYB57p--Wa2Rs5BASD5Ec ';
+					param += ' -K AIzaSyASFkvmg0w4efBYB57p--Wa2Rs5BASD5Ec';
 				console.log(param);
-				var movie   = 'C:/GIT/EXJOBB/test.mp4';
+				var movie   = ' C:/GIT/EXJOBB/test.mp4';
 				try {
 					var cmd = exec(pyth + autosub + param + movie);
 				} catch (err) {
